@@ -23,23 +23,18 @@ namespace Tennis
 
         public string GetScore()
         {
-            string score = "";
-            var tempScore = 0;
-            if (EqualScore())
-            {
-                score = GetScoreForEqualScore(m_score1);
-            }
-            else if (m_score1 >= 4 || m_score2 >= 4)
-            {
-                score = ScoreNameWithSomePLayerOverThree(m_score1, m_score2);
-            }
-            else
-            {
-                score=GetScoreNameForThreeOrLess(m_score1)
-                    +"-"
-                    +GetScoreNameForThreeOrLess(m_score2);
-            }
-            return score;
+            if (EqualScore()) return GetScoreForEqualScore(m_score1);
+            
+            if (SomePlayerOverThreePoints()) return ScoreNameWithSomePLayerOverThree(m_score1, m_score2);
+            
+            return GetScoreNameForThreeOrLess(m_score1)
+                +"-"
+                +GetScoreNameForThreeOrLess(m_score2);
+        }
+
+        private bool SomePlayerOverThreePoints()
+        {
+            return m_score1 >= 4 || m_score2 >= 4;
         }
 
         private string ScoreNameWithSomePLayerOverThree(int player1Score, int player2Score)
@@ -72,17 +67,9 @@ namespace Tennis
         
         private static string GetScoreNameForTwoOrLess(int score)
         {
-            switch (score)
-            {
-                case 0:
-                    return "Love";
-                case 1:
-                    return "Fifteen";
-                case 2:
-                    return "Thirty";
-            }
-
-            return "";
+            if (score == 0) return "Love";
+            if (score == 1) return "Fifteen";
+            return "Thirty";
         }
     }
 }
