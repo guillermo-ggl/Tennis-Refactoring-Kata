@@ -25,7 +25,7 @@ namespace Tennis
         {
             string score = "";
             var tempScore = 0;
-            if (m_score1 == m_score2)
+            if (EqualScore())
             {
                 switch (m_score1)
                 {
@@ -61,9 +61,29 @@ namespace Tennis
             return score;
         }
 
-        private static string GetScoreNameForThreeOrLess(int tempScore)
+        private bool EqualScore()
         {
-            switch (tempScore)
+            return m_score1 == m_score2;
+        }
+
+        private static string GetScoreNameForThreeOrLess(int score)
+        {
+            switch (score)
+            {
+                case 0:
+                case 1:
+                case 2:
+                    return GetScoreNameForTwoOrLess(score);
+                case 3:
+                    return "Forty";
+            }
+
+            return "";
+        }
+        
+        private static string GetScoreNameForTwoOrLess(int score)
+        {
+            switch (score)
             {
                 case 0:
                     return "Love";
@@ -71,8 +91,6 @@ namespace Tennis
                     return "Fifteen";
                 case 2:
                     return "Thirty";
-                case 3:
-                    return "Forty";
             }
 
             return "";
