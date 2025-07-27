@@ -30,13 +30,9 @@ namespace Tennis
                 switch (m_score1)
                 {
                     case 0:
-                        score = "Love-All";
-                        break;
                     case 1:
-                        score = "Fifteen-All";
-                        break;
                     case 2:
-                        score = "Thirty-All";
+                        score = GetScoreNameForTwoOrLess(m_score1) + "-All";
                         break;
                     default:
                         score = "Deuce";
