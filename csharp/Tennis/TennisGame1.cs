@@ -27,18 +27,7 @@ namespace Tennis
             var tempScore = 0;
             if (EqualScore())
             {
-                switch (m_score1)
-                {
-                    case 0:
-                    case 1:
-                    case 2:
-                        score = GetScoreNameForTwoOrLess(m_score1) + "-All";
-                        break;
-                    default:
-                        score = "Deuce";
-                        break;
-
-                }
+                score = GetScoreForEqualScore(m_score1);
             }
             else if (m_score1 >= 4 || m_score2 >= 4)
             {
@@ -57,6 +46,13 @@ namespace Tennis
             return score;
         }
 
+        private string GetScoreForEqualScore(int tempScore)
+        {
+            if (tempScore > 2) return "Deuce";
+            
+            return GetScoreNameForTwoOrLess(tempScore) + "-All";
+        }
+
         private bool EqualScore()
         {
             return m_score1 == m_score2;
@@ -64,17 +60,9 @@ namespace Tennis
 
         private static string GetScoreNameForThreeOrLess(int score)
         {
-            switch (score)
-            {
-                case 0:
-                case 1:
-                case 2:
-                    return GetScoreNameForTwoOrLess(score);
-                case 3:
-                    return "Forty";
-            }
+            if (score == 3) return "Forty";
 
-            return "";
+            return GetScoreNameForTwoOrLess(score);
         }
         
         private static string GetScoreNameForTwoOrLess(int score)
