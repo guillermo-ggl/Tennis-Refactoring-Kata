@@ -54,13 +54,9 @@ namespace Tennis
             }
             else
             {
-                for (var i = 1; i < 3; i++)
-                {
-                    if (i == 1) tempScore = m_score1;
-                    else { score += "-"; tempScore = m_score2; }
-
-                    score += GetScoreNameForThreeOrLess(tempScore);
-                }
+                score=GetScoreNameForThreeOrLess(m_score1)
+                    +"-"
+                    +GetScoreNameForThreeOrLess(m_score2);
             }
             return score;
         }
